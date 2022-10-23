@@ -1,0 +1,7 @@
+cradle:
+  cabal:
+    - path: "app/Main.hs"
+      component: "compiler:exe:compiler"
+
+    - path: "src/Test.hs"
+      component: "lib:compiler"
