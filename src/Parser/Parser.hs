@@ -35,7 +35,8 @@ expr :: Parser Expr.Expr
 expr = makeExprParser term opTable
 
 term :: Parser Expr.Expr
-term =  Expr.Literal <$> literal
+term =  Expr.Literal <$> try literal
+    <|> Expr.Id      <$> try identifier
     <|> parens expr
 
 literal :: Parser Literal.Literal

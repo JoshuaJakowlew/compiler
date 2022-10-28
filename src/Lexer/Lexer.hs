@@ -85,11 +85,31 @@ rword :: Text -> Parser ()
 rword w = try $ word >>= check >> pure ()
   where
     word = string w <* notFollowedBy alphaNumChar
-    check x | x `elem` rws = pure x
-            | otherwise    = fail . T.unpack $ w <> " is not a keyword"
+    check = failOnNonRW (<> " is not a keyword")
+
+identifier :: Parser Text
+identifier = (lexeme . try) (packedName >>= check)
+  where
+    packedName = T.pack <$> name
+    name = (:) <$>      (letterChar   <|> char '_')
+               <*> many (alphaNumChar <|> char '_')
+    check = failOnRW \x -> "keyword " <> x <> " cannot be a keyword"
 
 rws :: [Text]
 rws =
   [ "true"
   , "false"
   ]
+
+isRW :: Text -> Bool
+isRW = (`elem` rws)
+
+failOn :: (MonadFail m) => (Text -> Bool) -> (Text -> Text) -> Text -> m Text
+failOn p err x | p x       = pure x
+               | otherwise = fail . T.unpack $ err x
+
+failOnRW :: (MonadFail m) => (Text -> Text) -> Text -> m Text
+failOnRW = failOn $ not . isRW
+
+failOnNonRW :: (MonadFail m) => (Text -> Text) -> Text -> m Text
+failOnNonRW = failOn isRW
