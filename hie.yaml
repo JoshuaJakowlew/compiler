@@ -3,5 +3,20 @@ cradle:
     - path: "app/Main.hs"
       component: "compiler:exe:compiler"
 
-    - path: "src/Test.hs"
+    - path: "src/AST/AST.hs"
+      component: "lib:compiler"
+
+    - path: "src/Lexer/Lexer.hs"
+      component: "lib:compiler"
+
+    - path: "src/Parser/Parser.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Literal.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/BinOp.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Expr.hs"
       component: "lib:compiler"
