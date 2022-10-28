@@ -4,16 +4,11 @@ import Data.Text
 import Data.Functor ( ($>) )
 import Text.Megaparsec
 import Control.Monad.Combinators.Expr
--- import Control.Applicative (liftA2, liftA3)
--- import Data.Either
--- import qualified AST.AST as AST
--- import qualified AST.AST as Ast
 
 import Lexer.Lexer
 import AST.Expr  qualified as Expr
 import AST.BinOp qualified as BinOp
 import AST.Literal qualified as Literal
-import AST.Expr (Expr(Literal))
 
 opTable :: [[Operator Parser Expr.Expr]]
 opTable = arithmOpTable
