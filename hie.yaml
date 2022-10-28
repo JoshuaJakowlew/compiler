@@ -12,6 +12,9 @@ cradle:
     - path: "src/Parser/Parser.hs"
       component: "lib:compiler"
 
+    - path: "src/Utils.hs"
+      component: "lib:compiler"
+
     - path: "src/AST/Literal.hs"
       component: "lib:compiler"
 

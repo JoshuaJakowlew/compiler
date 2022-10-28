@@ -28,8 +28,11 @@ common deps
         , megaparsec
         , string-conversions
         , parser-combinators
+        -- Main pretty-printer
         , prettyprinter
-        
+        -- for raw AST indentation
+        , pretty-simple
+
     ghc-options: -Wall -Werror -fno-warn-missing-signatures -threaded -fno-warn-unused-imports
     default-extensions:
         AllowAmbiguousTypes
@@ -86,6 +89,7 @@ library
         AST.AST
         Lexer.Lexer
         Parser.Parser
+        Utils
     other-modules:
         AST.Literal
         AST.BinOp
