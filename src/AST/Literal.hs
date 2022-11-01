@@ -1,6 +1,7 @@
 module AST.Literal where
 
 import Prettyprinter
+import Prelude
 
 data Literal
   = Int Int

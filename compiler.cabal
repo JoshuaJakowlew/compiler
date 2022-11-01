@@ -46,6 +46,7 @@ common deps
         DeriveTraversable
         DerivingStrategies
         DerivingVia
+        DisambiguateRecordFields
         DuplicateRecordFields
         EmptyCase
         FlexibleContexts
@@ -60,8 +61,10 @@ common deps
         MultiWayIf
         NamedFieldPuns
         OverloadedStrings
+        OverloadedRecordDot
         PatternSynonyms
         RankNTypes
+        RebindableSyntax
         ScopedTypeVariables
         StandaloneDeriving
         TemplateHaskell
@@ -79,7 +82,7 @@ executable compiler
 
     build-depends: compiler
     hs-source-dirs:   app
-    default-language: Haskell2010
+    default-language: GHC2021
     ghc-options: -haddock
 
 library
@@ -91,7 +94,15 @@ library
         Parser.Parser
         Utils
     other-modules:
+        AST.Expr
         AST.Literal
         AST.BinOp
-        AST.Expr
-    default-language: Haskell2010
+        AST.Statement
+        AST.Function.Decl
+        AST.Function.Body
+        AST.Function
+        AST.Pattern
+        AST.Type
+        AST.Member
+        AST.Struct
+    default-language: GHC2021

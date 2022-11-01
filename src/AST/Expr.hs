@@ -5,6 +5,8 @@ import Data.Text ( Text )
 
 import AST.Literal qualified as Literal
 import AST.BinOp   qualified as BinOp
+import Prelude
+import Data.String (fromString)
 
 data Expr
   = Literal Literal.Literal

@@ -15,11 +15,35 @@ cradle:
     - path: "src/Utils.hs"
       component: "lib:compiler"
 
+    - path: "src/AST/Expr.hs"
+      component: "lib:compiler"
+
     - path: "src/AST/Literal.hs"
       component: "lib:compiler"
 
     - path: "src/AST/BinOp.hs"
       component: "lib:compiler"
 
-    - path: "src/AST/Expr.hs"
+    - path: "src/AST/Statement.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Function/Decl.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Function/Body.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Function.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Pattern.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Type.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Member.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Struct.hs"
       component: "lib:compiler"

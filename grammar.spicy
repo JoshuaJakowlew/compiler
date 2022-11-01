@@ -1,0 +1,4 @@
+struct foo
+    i32 x
+    i64 y
+    bool z

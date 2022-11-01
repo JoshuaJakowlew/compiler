@@ -12,6 +12,9 @@ import qualified Data.Text                     as T
 import           Control.Monad                  ( void )
 import           Data.String.Conversions
 import Data.Functor.Identity (Identity)
+import Data.String
+import Prelude
+
 
 type Parser = Parsec Void Text
 
@@ -21,14 +24,25 @@ lineComment = L.skipLineComment "//"
 blockComment :: Parser ()
 blockComment = L.skipBlockCommentNested "/*" "*/"
 
+scn :: Parser ()
+scn = L.space space1 lineComment blockComment
+
 sc :: Parser ()
-sc = L.space space1 lineComment blockComment
+sc = L.space indent lineComment blockComment
+  where
+    indent = void $ some (char ' ' <|> char '\t')
 
 lexeme :: Parser a -> Parser a
 lexeme = L.lexeme sc
 
 symbol :: T.Text -> Parser T.Text
 symbol = L.symbol sc
+
+toplevel :: Parser a -> Parser a
+toplevel = L.nonIndented scn
+
+indentBlock :: Parser (L.IndentOpt Parser a b) -> Parser a
+indentBlock = L.indentBlock scn
 
 between :: Text -> Text -> Parser a -> Parser a
 between open close = M.between (symbol open) (symbol close)
@@ -45,6 +59,9 @@ dquotes = between "\"" "\""
 squotes :: Parser a -> Parser a
 squotes = between "'" "'"
 
+colon :: Parser()
+colon = void $ symbol ":"
+
 semicolon :: Parser()
 semicolon = void $ char ';'
 
@@ -53,6 +70,9 @@ comma = void $ char ','
 
 star :: Parser ()
 star = void $ char '*'
+
+arrow :: Parser ()
+arrow = void $ symbol "->"
 
 noSpace :: Parser ()
 noSpace = pure ()
@@ -82,9 +102,9 @@ bool =  rword "true"  $> True
     <|> rword "false" $> False
 
 rword :: Text -> Parser ()
-rword w = try $ word >>= check >> pure ()
+rword w = (lexeme . try) $ word >>= check >> pure ()
   where
-    word = string w <* notFollowedBy alphaNumChar
+    word = string w <* notFollowedBy (alphaNumChar <|> char '_')
     check = failOnNonRW (<> " is not a keyword")
 
 identifier :: Parser Text
@@ -99,6 +119,10 @@ rws :: [Text]
 rws =
   [ "true"
   , "false"
+  , "i32"
+  , "f64"
+  , "bool"
+  , "struct"
   ]
 
 isRW :: Text -> Bool
