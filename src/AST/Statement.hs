@@ -6,12 +6,14 @@ import Prelude
 
 import AST.Struct qualified as Struct
 import AST.Function qualified as Function
-import AST.Expr qualified as Expr
+import AST.Var qualified as Var
+import AST.Var (Var)
 
 data Statement
   = Struct   Struct.Struct
   | FuncDecl Function.Decl
   | FuncBody Function.Body
+  | Var      Var.Var
   deriving (Show, Eq)
 
 instance Pretty Statement where
@@ -19,3 +21,4 @@ instance Pretty Statement where
     Struct   s -> pretty s
     FuncDecl d -> pretty d
     FuncBody b -> pretty b
+    Var      v -> pretty v

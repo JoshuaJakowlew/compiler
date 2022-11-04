@@ -3,7 +3,7 @@ module Parser.Parser where
 import Data.Text ( Text )
 import Data.Functor ( ($>), (<&>) )
 import Data.Text.IO (readFile)
-import Text.Megaparsec
+import Text.Megaparsec hiding (eof)
 import Text.Megaparsec.Char.Lexer qualified as L
 import Control.Monad.Combinators.Expr
 
@@ -17,13 +17,19 @@ import AST.Struct qualified as Struct
 import AST.Function qualified as Function
 import AST.Pattern qualified as Pattern
 import AST.Statement qualified as Statement
-
+import AST.Var qualified as Var
+import AST.Module qualified as Module
 
 import Data.String (fromString)
 import Prelude hiding (readFile)
 
-parseFile :: Parser a -> String -> IO (Maybe a)
-parseFile parser path = do
+parseFileTest :: (Show a) => Parser a -> String -> IO ()
+parseFileTest parser path = do
+  text <- readFile path
+  parseTest parser text
+
+parseFileMaybe :: (Show a) => Parser a -> String -> IO (Maybe a)
+parseFileMaybe parser path = do
   text <- readFile path
   return $ parseMaybe parser text
 
@@ -103,4 +109,22 @@ pattern' = Pattern.Id <$> identifier
 statement :: Parser Statement.Statement
 statement =  Statement.Struct   <$> try struct
          <|> Statement.FuncDecl <$> try funcDecl
-         <|> Statement.FuncBody <$> funcBody
+         <|> Statement.FuncBody <$> try funcBody
+         <|> Statement.Var      <$> var
+
+var :: Parser Var.Var
+var =  Var.InferredDecl <$> try (let' *> identifier <* eq) <*> try expr
+   <|> Var.Decl         <$> type' <*> (identifier <* eq) <*> expr
+   where
+    let' = rword "let"
+    eq   = symbol "="
+
+module' :: Parser Module.Module
+module' = do 
+  n <- toplevel name
+  ds <- definitions
+  eof
+  return $ Module.Module n ds
+  where
+    name        = rword "module" *> identifier
+    definitions = many $ toplevel statement

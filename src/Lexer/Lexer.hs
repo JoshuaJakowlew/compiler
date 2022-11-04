@@ -3,7 +3,7 @@ module Lexer.Lexer where
 import Data.Functor ( ($>) )
 import           Data.Void
 import           Data.Char
-import           Text.Megaparsec hiding (between)
+import           Text.Megaparsec hiding (eof, between)
 import           Text.Megaparsec qualified as M
 import           Text.Megaparsec.Char
 import qualified Text.Megaparsec.Char.Lexer    as L
@@ -31,6 +31,9 @@ sc :: Parser ()
 sc = L.space indent lineComment blockComment
   where
     indent = void $ some (char ' ' <|> char '\t')
+
+eof :: Parser ()
+eof = scn *> M.eof
 
 lexeme :: Parser a -> Parser a
 lexeme = L.lexeme sc
@@ -123,6 +126,8 @@ rws =
   , "f64"
   , "bool"
   , "struct"
+  , "let"
+  , "module"
   ]
 
 isRW :: Text -> Bool

@@ -47,3 +47,9 @@ cradle:
 
     - path: "src/AST/Struct.hs"
       component: "lib:compiler"
+
+    - path: "src/AST/Var.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Module.hs"
+      component: "lib:compiler"

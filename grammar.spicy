@@ -1,4 +1,19 @@
+module Main
+
 struct foo
     i32 x
     i64 y
     bool z
+
+add : i32 -> i32 -> i32
+add x y = x + y
+
+div : i32 -> i32 -> f64
+sub : i32 -> i32 -> i32
+
+div x y = x / y
+
+sub x y = x - y
+
+f64 PI = 3.0 + 0.14
+let iPI = 0b10 + 0x1 - 0
