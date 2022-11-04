@@ -11,12 +11,21 @@ data BinOp
   | Mul
   | Div
   | Pow
+  | IntPow
+  | BitAnd
+  | BitOr
+  | BitXor
   deriving (Show, Eq)
 
 instance Pretty BinOp where
   pretty = \case
-    Add -> "+"
-    Sub -> "-"
-    Mul -> "*"
-    Div -> "/"
-    Pow -> "**"
+    Add    -> "+"
+    Sub    -> "-"
+    Mul    -> "*"
+    Div    -> "/"
+    Pow    -> "^"
+    IntPow -> "**"
+    BitAnd -> "&"
+    BitOr  -> "|"
+    BitXor -> "(+)"
+

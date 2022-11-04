@@ -32,13 +32,20 @@ opTable = arithmOpTable
 
 arithmOpTable :: [[Operator Parser Expr.Expr]]
 arithmOpTable =
-  [ [ infixR BinOp.Pow "**"
+  [ [ infixR BinOp.Pow    "^"
+    , infixR BinOp.IntPow "**"
     ]
   , [ infixL BinOp.Mul "*"
     , infixL BinOp.Div "/"
     ]  
   , [ infixL BinOp.Add "+"
     , infixL BinOp.Sub "-"
+    ]
+  , [ infixL BinOp.BitAnd "&"
+    ]
+  , [ infixL BinOp.BitOr "|"
+    ]
+  , [ infixL BinOp.BitXor "(+)"
     ]
   ]
 
