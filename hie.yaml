@@ -53,3 +53,15 @@ cradle:
 
     - path: "src/AST/Module.hs"
       component: "lib:compiler"
+
+    - path: "src/SAST/Module.hs"
+      component: "lib:compiler"
+
+    - path: "src/SAST/Expr.hs"
+      component: "lib:compiler"
+
+    - path: "src/SAST/Type.hs"
+      component: "lib:compiler"
+
+    - path: "src/AST/Internal/Parsable.hs"
+      component: "lib:compiler"

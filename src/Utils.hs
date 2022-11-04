@@ -6,6 +6,11 @@ import Prettyprinter.Render.Text ( putDoc )
 import GHC.Records
 import Prelude
 import Data.String (fromString)
+import Text.Megaparsec
+import Data.Void (Void)
+import Data.Text
+
+type Parser = Parsec Void Text
 
 pprint :: (Show a) => a -> IO ()
 pprint = pPrintOpt CheckColorTty defaultOutputOptionsDarkBg

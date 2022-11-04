@@ -14,9 +14,7 @@ import           Data.String.Conversions
 import Data.Functor.Identity (Identity)
 import Data.String
 import Prelude
-
-
-type Parser = Parsec Void Text
+import Utils ( Parser )
 
 lineComment :: Parser ()
 lineComment = L.skipLineComment "//"

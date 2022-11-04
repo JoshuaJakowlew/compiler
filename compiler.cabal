@@ -32,6 +32,8 @@ common deps
         , prettyprinter
         -- for raw AST indentation
         , pretty-simple
+        , unordered-containers
+        , hashable
 
     ghc-options: -Wall -Werror -fno-warn-missing-signatures -threaded -fno-warn-unused-imports
     default-extensions:
@@ -107,4 +109,8 @@ library
         AST.Struct
         AST.Var
         AST.Module
+        SAST.Module
+        SAST.Expr
+        SAST.Type
+        AST.Internal.Parsable
     default-language: GHC2021
