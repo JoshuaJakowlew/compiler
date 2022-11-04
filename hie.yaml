@@ -27,12 +27,6 @@ cradle:
     - path: "src/AST/Statement.hs"
       component: "lib:compiler"
 
-    - path: "src/AST/Function/Decl.hs"
-      component: "lib:compiler"
-
-    - path: "src/AST/Function/Body.hs"
-      component: "lib:compiler"
-
     - path: "src/AST/Function.hs"
       component: "lib:compiler"
 
@@ -40,9 +34,6 @@ cradle:
       component: "lib:compiler"
 
     - path: "src/AST/Type.hs"
-      component: "lib:compiler"
-
-    - path: "src/AST/Member.hs"
       component: "lib:compiler"
 
     - path: "src/AST/Struct.hs"
@@ -64,4 +55,7 @@ cradle:
       component: "lib:compiler"
 
     - path: "src/AST/Internal/Parsable.hs"
+      component: "lib:compiler"
+
+    - path: "src/Semant/Semant.hs"
       component: "lib:compiler"

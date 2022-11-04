@@ -100,12 +100,9 @@ library
         AST.Literal
         AST.BinOp
         AST.Statement
-        AST.Function.Decl
-        AST.Function.Body
         AST.Function
         AST.Pattern
         AST.Type
-        AST.Member
         AST.Struct
         AST.Var
         AST.Module
@@ -113,4 +110,5 @@ library
         SAST.Expr
         SAST.Type
         AST.Internal.Parsable
+        Semant.Semant
     default-language: GHC2021
