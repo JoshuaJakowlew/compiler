@@ -34,7 +34,9 @@ common deps
         , pretty-simple
         , unordered-containers
         , hashable
-
+        , mtl
+        , lens
+        , data-default
     ghc-options: -Wall -Werror -fno-warn-missing-signatures -threaded -fno-warn-unused-imports
     default-extensions:
         AllowAmbiguousTypes
@@ -106,9 +108,12 @@ library
         AST.Struct
         AST.Var
         AST.Module
+        AST.Internal.Parsable
         SAST.Module
         SAST.Expr
         SAST.Type
-        AST.Internal.Parsable
+        SAST.Literal
+        SAST.Var
         Semant.Semant
+        Semant.Checkable
     default-language: GHC2021

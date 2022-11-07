@@ -1,5 +1,6 @@
 module AST.Var where
-  
+
+import Control.Lens  
 import Data.Hashable (Hashable)
 import Data.String (fromString)
 import Data.Text
@@ -14,9 +15,18 @@ import AST.Expr qualified as Expr
 import Lexer.Lexer
 
 data Var
-  = Decl         Type.Type Text Expr.Expr
-  | InferredDecl           Text Expr.Expr
+  = Decl
+    { type' :: Type.Type
+    , name  :: Text
+    , value :: Expr.Expr
+    }
+  | InferredDecl
+    { name  :: Text
+    , value :: Expr.Expr
+    }
   deriving (Show, Eq, Generic, Hashable)
+
+makePrisms ''Var
 
 instance Pretty Var where
   pretty  = \case

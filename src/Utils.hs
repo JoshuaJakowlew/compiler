@@ -9,6 +9,7 @@ import Data.String (fromString)
 import Text.Megaparsec
 import Data.Void (Void)
 import Data.Text
+import Data.Bool
 
 type Parser = Parsec Void Text
 
@@ -20,3 +21,6 @@ pprint = pPrintOpt CheckColorTty defaultOutputOptionsDarkBg
 
 pprint' :: (Pretty a) => a -> IO ()
 pprint' x = putDoc (pretty x) >> putStrLn ""
+
+ifThenElse :: Bool -> a -> a -> a
+ifThenElse c x y = Data.Bool.bool y x c

@@ -84,6 +84,7 @@ signed = L.signed noSpace
 decimal :: (Integral a) => Parser a
 decimal = lexeme L.decimal
 
+-- FIXME: Works only with lowercase letter-digits, i.e. 0xCAFEBABE doesn't parse
 hexadecimal :: (Integral a) => Parser a
 hexadecimal = lexeme (char '0' *> char' 'x' *> L.hexadecimal)
 

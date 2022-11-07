@@ -45,6 +45,9 @@ cradle:
     - path: "src/AST/Module.hs"
       component: "lib:compiler"
 
+    - path: "src/AST/Internal/Parsable.hs"
+      component: "lib:compiler"
+
     - path: "src/SAST/Module.hs"
       component: "lib:compiler"
 
@@ -54,8 +57,14 @@ cradle:
     - path: "src/SAST/Type.hs"
       component: "lib:compiler"
 
-    - path: "src/AST/Internal/Parsable.hs"
+    - path: "src/SAST/Literal.hs"
+      component: "lib:compiler"
+
+    - path: "src/SAST/Var.hs"
       component: "lib:compiler"
 
     - path: "src/Semant/Semant.hs"
+      component: "lib:compiler"
+
+    - path: "src/Semant/Checkable.hs"
       component: "lib:compiler"

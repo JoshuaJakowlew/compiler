@@ -1,3 +1,5 @@
-module SAST.Module where
+module SAST.Module
+  ( module AST.Module
+  ) where
 
-import AST.Module qualified as Module
+import AST.Module
